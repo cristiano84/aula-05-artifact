@@ -1,0 +1,41 @@
+name: Go Build Example
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  FILE_NAME: hello-server
+
+jobs:
+  BuildGo:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout o código na branch main
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step para build no Linux
+      - name: Build Go for Linux
+        run: go build ${{ env.FILE_NAME }}.go
+
+      - name: Upload artifact for linux
+        uses: actions/upload-artifact@v1.0.0 
+        with:
+        name: linux
+        path: ./${{ env.FILE_NAME }}
+
+
+
+      # Step para build no Windows
+      - name: Build Go for Windows
+        run: |
+          GOOS=windows GOARCH=amd64 go build ${{ env.FILE_NAME }}.go
+
+      - name: Upload artifact for windows
+        uses: actions/upload-artifact@v1.0.0
+        with:
+        name: windows
+        path: ./${{ env.FILE_NAME }}.exe
