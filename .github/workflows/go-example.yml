@@ -22,7 +22,7 @@ jobs:
         run: go build ${{ env.FILE_NAME }}.go
 
       - name: Upload artifact for linux
-        uses: actions/upload-artifact@v2.0.0 
+        uses: actions/upload-artifact@v4.0.0 
         with:
           name: linux
           path: ./${{ env.FILE_NAME }}
@@ -35,7 +35,7 @@ jobs:
           GOOS=windows GOARCH=amd64 go build ${{ env.FILE_NAME }}.go
 
       - name: Upload artifact for windows
-        uses: actions/upload-artifact@v2.0.0
+        uses: actions/upload-artifact@v4.0.0
         with:
           name: windows
           path: ./${{ env.FILE_NAME }}.exe
